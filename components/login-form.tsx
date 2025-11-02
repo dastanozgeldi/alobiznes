@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,9 +34,6 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -92,6 +90,7 @@ export function LoginForm({
                       id="password"
                       aria-invalid={fieldState.invalid}
                       type="password"
+                      placeholder="********"
                       required
                     />
                     {fieldState.invalid && (
@@ -104,7 +103,7 @@ export function LoginForm({
               <Field>
                 <Button type="submit">Войти</Button>
                 <FieldDescription className="text-center">
-                  Нет аккаунта? <a href="#">Зарегистрироваться</a>
+                  Нет аккаунта? <Link href="/sign-up">Зарегистрироваться</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
