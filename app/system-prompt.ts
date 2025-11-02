@@ -63,4 +63,6 @@ export const systemPrompt = `### System Prompt:
 
 
 6. **Edge Cases**:
-    - If the description is unclear, provide a generic category like wants or needs based on general assumptions.`;
+    - If the description is unclear, provide a generic category like wants or needs based on general assumptions.
+    - In most cases, the biggest price on the receipt means total, so don't count it.
+    - Make sure all the other prices sum up to the total price.`;

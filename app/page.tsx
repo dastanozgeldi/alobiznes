@@ -22,11 +22,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 
 const initialState = {
   success: false,
   data: [],
 };
+
+function getCategoryBadgeClasses(category: string): string {
+  switch (category) {
+    case "wants":
+      return "bg-yellow-200 text-black";
+    case "needs":
+      return "bg-red-800 text-white";
+    case "bills":
+      return "bg-blue-800 text-white";
+    case "groceries":
+      return "bg-green-800 text-white";
+    case "rare_buy":
+      return "bg-amber-800 text-white";
+    case "commission":
+      return "bg-pink-200 text-black";
+    case "eat-out":
+      return "bg-purple-200 text-black";
+    case "transport":
+      return "bg-purple-800 text-white";
+    default:
+      return "";
+  }
+}
 
 export default function Page() {
   const [state, formAction, isPending] = useActionState(
@@ -36,7 +60,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <div className="max-w-2xl mx-auto flex flex-col gap-4 w-full">
+      <div className="my-6 max-w-2xl mx-auto flex flex-col gap-4 w-full">
         <div>
           <h1 className="text-2xl font-bold">Ало, бизнес?</h1>
           <p className="text-muted-foreground font-medium">
@@ -100,16 +124,16 @@ export default function Page() {
           </Button>
         </form>
 
-        {isPending && <Skeleton className="h-[400px] w-full" />}
+        {isPending && <Skeleton className="h-[300px] w-full" />}
         {state.success && state.data && (
           <Table>
             <TableHeader>
               <TableRow className="bg-muted">
                 <TableHead>Дата</TableHead>
                 <TableHead>Название</TableHead>
-                <TableHead>Цена</TableHead>
-                <TableHead>Конвертированная цена</TableHead>
-                <TableHead>Перевод названия</TableHead>
+                <TableHead>Ориг. цена</TableHead>
+                <TableHead>Конв. цена</TableHead>
+                <TableHead>Категория</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -119,7 +143,11 @@ export default function Page() {
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.original_price}</TableCell>
                   <TableCell>{item.converted_price}</TableCell>
-                  <TableCell>{item.name_translation}</TableCell>
+                  <TableCell>
+                    <Badge className={getCategoryBadgeClasses(item.category)}>
+                      {item.category}
+                    </Badge>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

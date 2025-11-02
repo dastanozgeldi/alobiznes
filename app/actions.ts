@@ -25,7 +25,16 @@ export async function readReceipt(initialState: unknown, formData: FormData) {
           original_price: z.string(),
           converted_price: z.number(),
           name_translation: z.string(),
-          category: z.string(),
+          category: z.enum([
+            "wants",
+            "needs",
+            "bills",
+            "groceries",
+            "rare_buy",
+            "commission",
+            "eat-out",
+            "transport",
+          ]),
         })
       ),
       messages: [
