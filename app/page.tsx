@@ -37,7 +37,7 @@ export default function Page() {
   );
 
   return (
-    <div className="m-6 max-w-2xl mx-auto flex flex-col gap-4 w-full">
+    <div className="flex flex-col gap-4 w-full">
       <div>
         <h1 className="text-2xl font-bold">Ало, бизнес?</h1>
         <p className="text-muted-foreground font-medium">
