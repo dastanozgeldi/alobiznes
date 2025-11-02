@@ -8,7 +8,7 @@ const openrouter = createOpenRouter({
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
-export async function readReceipt(formData: FormData) {
+export async function readReceipt(initialState: unknown, formData: FormData) {
   const file = formData.get("receipt") as File;
   const fileBuffer = await file.arrayBuffer();
   const fileBase64 = Buffer.from(fileBuffer).toString("base64");
@@ -150,5 +150,8 @@ Here's an example of what the structured output might look like based on the pro
     ],
   });
 
-  console.log(JSON.stringify(object, null, 2));
+  return {
+    success: true,
+    data: object,
+  };
 }
